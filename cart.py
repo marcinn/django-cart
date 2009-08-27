@@ -33,10 +33,7 @@ class Cart:
 
     def add(self, product, unit_price, quantity=1):
         try:
-            item = models.Item.objects.get(
-                cart=self.cart,
-                product=product,
-            )
+            item = models.Item.objects.get(cart=self.cart, product=product,)
         except models.Item.DoesNotExist:
             item = models.Item()
             item.cart = self.cart
@@ -58,12 +55,17 @@ class Cart:
         else:
             item.delete()
 
-    def update(self, product, quantity, unit_price=None):
+    def update(self, product, unit_price, quantity):
         try:
             item = models.Item.objects.get(
                 cart=self.cart,
                 product=product,
             )
+            item.cart = self.cart
+            item.product = product
+            item.unit_price = unit_price
+            item.quantity = quantity
+            item.save(force_update = True)
         except models.Item.DoesNotExist:
             raise ItemDoesNotExist
 
@@ -71,3 +73,12 @@ class Cart:
         for item in self.cart.item_set:
             item.delete()
 
+    # There's all sort of info you might want to easily get from your cart
+    
+    def getQuantity(self, product):
+        try: 
+            item = models.Item.objects.get(cart = self.cart, product = product)
+            return item.quantity
+            
+        except models.Item.DoesNotExist:
+            raise ItemDoesNotExist

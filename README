@@ -1,0 +1,22 @@
+I've forked this project from [django-cart]() on Google Code. It seems like 
+it was initially started by Eric Woudenberg and then taken over by
+Marc Garcia. It seems like the project was never really completed. Some 
+methods didn't do anything, updates haven't been made in a while, etc. It's
+licensed under the GPL which wouldn't have been my preference but I don't 
+think there's a whole lot I could do there.
+
+I have made a few changes. I implemented the update method for the cart. I 
+don't know if this is the best way of doing it but so far it works for my 
+purposes to I welcome any additions or modifications. The biggest change is 
+probably the integration of [python-money](). I think currency calculation is 
+beyond the scope of a shopping cart app and is probably best handled by 
+a separately maintained module. Unfortunately, it looks like python-money also
+has fallen into disuse so if you're going to use this, be prepared to have to 
+install this module as well. Also, there's an important patch I attached to 
+an [open issue]() that you will want to apply if you're using a version of 
+Django released in the last year (you probably are).
+
+
+[django-cart]: http://code.google.com/p/django-cart/
+[python-money]: http://code.google.com/p/python-money/
+[open issue]: http://code.google.com/p/python-money/issues/detail?id=3
