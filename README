@@ -1,21 +1,15 @@
-Django-cart is a lightweight pluggable cart app meant for integration with a 
-Django based e-commerce solution. [Satchmo][] is out there and apparently pretty
-mature, but I didn't want to deal with maintaining all the required 
-dependencies and needed more flexibility.
+# django-cart
 
-I've forked this project from [django-cart][] on Google Code. It seems like 
-it was initially started by Eric Woudenberg and then taken over by
-[Marc Garcia][]. The project had seemed to been abandoned so I contacted Marc
-and asked him if I could fork the project and relicense. He agreed, so I've
-released my updated version of django-cart on GitHub which adds update 
-functionality. I would have just hacked on the Google Code version but I 
-never bothered to learn svn and git just makes too much sense. Apparently 
-using git with Google Code is [more than doable][doable] but I'm proud of 
-myself for using any SCM and I don't need to add more complications to that. 
+Django-cart is a small, focused shopping cart meant to be integrated into 
+custom django e-commerce solutions. If you're looking for something more
+robust, take a look at Satchmo; however, note that Satchmo has a pretty steep
+learning curve, and, in my opinion, isn't very Django-like.
 
-As per my discussion with Marc, this code is now licensed under the MIT License.
+# Todos
 
-[satchmo]: http://www.satchmoproject.com/
-[django-cart]: http://code.google.com/p/django-cart/
-[marc garcia]: http://vaig.be/
-[doable]: http://google-opensource.blogspot.com/2008/05/develop-with-git-on-google-code-project.html
+django-cart currently works pretty well but requires you to write 
+implementation views for each project. I'd like to eventually have built-in
+view that would allow you to simply route URLs to this pluggable and have
+it automagically update the cart tables in your project's database. I don't 
+have the Django chops to pull that off right now, so if anyone is interested 
+in helping, I'd welcome any contributions.
