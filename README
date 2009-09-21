@@ -6,7 +6,7 @@ dependencies and needed more flexibility.
 I've forked this project from [django-cart][] on Google Code. It seems like 
 it was initially started by Eric Woudenberg and then taken over by
 [Marc Garcia][]. The project had seemed to been abandoned so I contacted Marc
-and asked him if I could fork the project and relicensed. He agreed, so I've
+and asked him if I could fork the project and relicense. He agreed, so I've
 released my updated version of django-cart on GitHub which adds update 
 functionality. I would have just hacked on the Google Code version but I 
 never bothered to learn svn and git just makes too much sense. Apparently 
