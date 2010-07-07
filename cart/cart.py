@@ -70,7 +70,7 @@ class Cart:
             raise ItemDoesNotExist
 
     def clear(self):
-        for item in self.cart.item_set:
+        for item in self.cart.item_set.all():
             item.delete()
 
     # There's all sort of info you might want to easily get from your cart
