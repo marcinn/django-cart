@@ -39,7 +39,7 @@ class Item(models.Model):
         ordering = ('cart',)
 
     def __unicode__(self):
-        return u''
+        return 'Item in cart: ' + unicode(self.cart)
 
     def total_price(self):
         return self.quantity * self.unit_price
