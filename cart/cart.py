@@ -82,3 +82,8 @@ class Cart:
             
         except models.Item.DoesNotExist:
             raise ItemDoesNotExist
+    
+    def checkout_cart(self):
+        self.cart.checked_out = True
+        self.cart.save()
+        return True
