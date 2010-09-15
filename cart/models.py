@@ -18,10 +18,12 @@ class Cart(models.Model):
         return unicode(self.creation_date)
 
     def get_total(self):
-        return self.item_set.aggregate(Sum('unit_price'))['unit_price__sum'] or 0
+        return sum([price*qty for price,qty in self.item_set.values_list(
+            'unit_price', 'quantity')]) or 0
 
     def get_total_net(self):
-        return self.item_set.aggregate(Sum('net_price'))['net_price__sum'] or 0
+        return sum([price*qty for price,qty in self.item_set.values_list(
+            'net_price', 'quantity')]) or 0
 
 class ItemManager(models.Manager):
     def get(self, *args, **kwargs):
@@ -55,6 +57,10 @@ class Item(models.Model):
     def total_price(self):
         return self.quantity * self.unit_price
     total_price = property(total_price)
+
+    def total_price_net(self):
+        return self.quantity * self.net_price
+    total_price_net = property(total_price_net)
 
     # product
     def get_product(self):
