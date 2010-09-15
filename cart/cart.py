@@ -10,8 +10,9 @@ class ItemDoesNotExist(Exception):
     pass
 
 class Cart:
-    def __init__(self, request):
-        cart_id = request.session.get(CART_ID)
+    def __init__(self, request, prefix=CART_ID):
+        self.prefix = prefix
+        cart_id = request.session.get(prefix)
         if cart_id:
             try:
                 cart = models.Cart.objects.get(id=cart_id, checked_out=False)
@@ -28,10 +29,10 @@ class Cart:
     def new(self, request):
         cart = models.Cart(creation_date=datetime.datetime.now())
         cart.save()
-        request.session[CART_ID] = cart.id
+        request.session[self.prefix] = cart.id
         return cart
 
-    def add(self, product, unit_price, quantity=1):
+    def add(self, product, unit_price, quantity=1, net_price=None):
         try:
             item = models.Item.objects.get(cart=self.cart, product=product,)
         except models.Item.DoesNotExist:
@@ -39,6 +40,7 @@ class Cart:
             item.cart = self.cart
             item.product = product
             item.unit_price = unit_price
+            item.net_price = net_price
             item.quantity = quantity
             item.save()
         else:
@@ -52,7 +54,7 @@ class Cart:
         else:
             item.delete()
 
-    def update(self, product, unit_price, quantity):
+    def update(self, product, unit_price, quantity, net_price=None):
         try:
             item = models.Item.objects.get(
                 cart=self.cart,
@@ -61,6 +63,7 @@ class Cart:
             item.cart = self.cart
             item.product = product
             item.unit_price = unit_price
+            item.net_price = net_price
             item.quantity = quantity
             item.save(force_update = True)
         except models.Item.DoesNotExist:
